@@ -1,16 +1,18 @@
 var search = $("#user-form")
 var city = $("#city-input")
+var buttons = $("#button-list")
 
 function formSubmitHandler(event) {
     event.preventDefault();
 
     if (city.val())
         getCityInfo(city.val());
+    addButton(city.val());
+    city.val("");
 };
 
 function getCityInfo(city) {
     var coordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=c5e9fba15567c9fdcf069c213871a2e5';
-    var lon, lat;
 
     fetch(coordinates)
         .then(response => response.json())
@@ -47,15 +49,13 @@ function fillContainer(data, x) {
         $("#main-container").append(cityEl, tempEl, windEl, humidityEl);
     else
         $("#mini-container" + x).append(cityEl, tempEl, windEl, humidityEl);
-
-    //addButton(cityEl);
 }
 
-// function addButton(name) {
-//     var buttonEl = $("<button>", { "class": "btn btn-secondary col-12 my-1" });
-//     buttonEl.text(name);
-//     buttonEl.attr("data-city-name", name);
-//     buttonListEl.prepend(buttonEl);
-// }
+function addButton(name) {
+    var buttonEl = $("<button>", { "class": "btn btn-secondary col-12 my-1" });
+    buttonEl.text(name);
+    buttonEl.attr("data-city-name", name);
+    buttons.prepend(buttonEl);
+}
 
 search.click(formSubmitHandler);
