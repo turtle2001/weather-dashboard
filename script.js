@@ -7,40 +7,48 @@ function formSubmitHandler(event) {
 
     if (city.val())
         getCityInfo(city.val());
-    // city.val('');
-
 };
 
 function getCityInfo(city) {
     var coordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=c5e9fba15567c9fdcf069c213871a2e5';
-    var lon, lat, temp, wind, humidity;
+    var lon, lat;
 
     fetch(coordinates)
         .then(response => response.json())
         .then(function (data) {
-            lat = data[0].lat;
-            lon = data[0].lon;
-
-            var weather = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=imperial&cnt=5&appid=c5e9fba15567c9fdcf069c213871a2e5';
+            var weather = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + data[0].lat + '&lon=' + data[0].lon + '&units=imperial&appid=c5e9fba15567c9fdcf069c213871a2e5';
 
             fetch(weather)
                 .then(response => response.json())
                 .then(function (data) {
-                    temp = data.list[0].main.temp;
-                    wind = data.list[0].wind.speed;
-                    humidity = data.list[0].main.humidity;
-                    displayInfo(city, temp, wind, humidity);
+                    displayInfo(data);
                 })
         })
 }
 
-function displayInfo(city, temp, wind, humidity) {
-    var cityEl = $("<h1></h1>").text(city);
-    var tempEl = $("<p></p>").text(temp);
-    var windEl = $("<p></p>").text(wind);
-    var humidityEl = $("<p></p>").text(humidity);
+function displayInfo(data) {
+    for (var i = 0; i < data.list.length; i++)
+        if (i % 8 == 0)
+            fillContainer(data, i / 8);
+        else if (i == data.list.length - 1)
+            fillContainer(data, 5);
+}
 
-    bigBox.append(cityEl, tempEl, windEl, humidityEl);
+function fillContainer(data, x) {
+    if (x == 5)
+        var cityEl = $("<h4></h4>").text(data.city.name + moment(data.list[39].dt_txt).format(' (MM/D/YYYY)'));
+    else
+        var cityEl = $("<h4></h4>").text(data.city.name + moment(data.list[x * 8].dt_txt).format(' (MM/D/YYYY)'));
+
+
+    var tempEl = $("<p></p>").text("Temperature: " + data.list[x].main.temp + " degrees");
+    var windEl = $("<p></p>").text("Wind: " + data.list[x].wind.speed + " MPH");
+    var humidityEl = $("<p></p>").text("Humidity: " + data.list[x].main.humidity + " %");
+
+    if (x == 0)
+        bigBox.append(cityEl, tempEl, windEl, humidityEl);
+    else
+        $("#mini-container" + x).append(cityEl, tempEl, windEl, humidityEl);
 }
 
 search.click(formSubmitHandler);
