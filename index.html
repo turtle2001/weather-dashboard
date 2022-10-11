@@ -15,14 +15,12 @@
     </div>
 </header>
 
-<main>
+<body>
     <div class="container-fluid row">
         <div class="col-3 border">
-            <form>
-                <div class="form-group">
-                    <label class="col-form-label-lg font-weight-bold">Search for a city:</label>
-                    <input class="form-control" id="cityName">
-                </div>
+            <form class="form" id="user-form">
+                <label class="col-form-label-lg font-weight-bold">Search for a city:</label>
+                <input class="form-control mb-2" id="city-input">
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
@@ -40,7 +38,7 @@
             <h2>5-Day Forecast:</h2>
 
             <div class="row border">
-                <div class="col bg-info border mr-2">
+                <div class="col bg-info border mr-3">
                     <ul class="p-0" class="p-0">
                         <h4 id="city">city goes here</h4>
                         <p id="icon">icon</p>
@@ -49,7 +47,7 @@
                         <p id="humidity">humidity goes here</p>
                     </ul>
                 </div>
-                <div class="col bg-info border mx-2">
+                <div class="col bg-info border mx-3">
                     <ul class="p-0" class="p-0">
                         <h4 id="city">city goes here</h4>
                         <p id="icon">icon</p>
@@ -58,7 +56,7 @@
                         <p id="humidity">humidity goes here</p>
                     </ul>
                 </div>
-                <div class="col bg-info border mx-2">
+                <div class="col bg-info border mx-3">
                     <ul class="p-0">
                         <h4 id="city">city goes here</h4>
                         <p id="icon">icon</p>
@@ -67,7 +65,7 @@
                         <p id="humidity">humidity goes here</p>
                     </ul>
                 </div>
-                <div class="col bg-info border mx-2">
+                <div class="col bg-info border mx-3">
                     <ul class="p-0">
                         <h4 id="city">city goes here</h4>
                         <p id="icon">icon</p>
@@ -76,7 +74,7 @@
                         <p id="humidity">humidity goes here</p>
                     </ul>
                 </div>
-                <div class="col bg-info border ml-2">
+                <div class="col bg-info border ml-3">
                     <ul class="p-0">
                         <h4 id="city">city goes here</h4>
                         <p id="icon">icon</p>
@@ -89,6 +87,9 @@
 
         </div>
     </div>
-</main>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="./script.js"></script>
+</body>
 
 </html>
