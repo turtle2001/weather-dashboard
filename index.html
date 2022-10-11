@@ -17,39 +17,25 @@
 
 <body>
     <div class="container-fluid row">
-        <div class="col-3 border">
-            <form class="form" id="user-form">
+            <form class="col-3 border form" id="user-form">
                 <label class="col-form-label-lg font-weight-bold">Search for a city:</label>
                 <input class="form-control mb-2" id="city-input">
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
-        </div>
-
-        <div class="col-9 border">
+      
+        <div class="col-9">
             <div class="row card-body border">
                 <ul class="p-0" id="main-container"></ul>
             </div>
 
             <h2>5-Day Forecast:</h2>
-
-            <div class="row border">
-                <div class="col bg-info border mr-3">
-                    <ul class="p-0" id="mini-container1"></ul>
-                </div>
-                <div class="col bg-info border mx-3">
-                    <ul class="p-0" id="mini-container2"></ul>
-                </div>
-                <div class="col bg-info border mx-3">
-                    <ul class="p-0" id="mini-container3"></ul>
-                </div>
-                <div class="col bg-info border mx-3">
-                    <ul class="p-0" id="mini-container4"></ul>
-                </div>
-                <div class="col bg-info border ml-3">
-                    <ul class="p-0" id="mini-container5"></ul>
-                </div>
+            <div class="row">
+                <div class="col bg-info mr-3 p-2" id="mini-container1"></div>
+                <div class="col bg-info mr-3 p-2" id="mini-container2"></div>
+                <div class="col bg-info mr-3 p-2" id="mini-container3"></div>
+                <div class="col bg-info mr-3 p-2" id="mini-container4"></div>
+                <div class="col bg-info mr-3 p-2" id="mini-container5"></div>
             </div>
-
         </div>
     </div>
 
