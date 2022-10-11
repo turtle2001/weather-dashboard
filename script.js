@@ -1,5 +1,6 @@
 var search = $("#user-form")
 var city = $("#city-input")
+var bigBox = $("#main-container")
 
 function formSubmitHandler(event) {
     event.preventDefault();
@@ -12,8 +13,7 @@ function formSubmitHandler(event) {
 
 function getCityInfo(city) {
     var coordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=c5e9fba15567c9fdcf069c213871a2e5';
-    var lon;
-    var lat;
+    var lon, lat, temp, wind, humidity;
 
     fetch(coordinates)
         .then(response => response.json())
@@ -26,9 +26,21 @@ function getCityInfo(city) {
             fetch(weather)
                 .then(response => response.json())
                 .then(function (data) {
-                    console.log(data.list[0].main.temp);
+                    temp = data.list[0].main.temp;
+                    wind = data.list[0].wind.speed;
+                    humidity = data.list[0].main.humidity;
+                    displayInfo(city, temp, wind, humidity);
                 })
         })
+}
+
+function displayInfo(city, temp, wind, humidity) {
+    var cityEl = $("<h1></h1>").text(city);
+    var tempEl = $("<p></p>").text(temp);
+    var windEl = $("<p></p>").text(wind);
+    var humidityEl = $("<p></p>").text(humidity);
+
+    bigBox.append(cityEl, tempEl, windEl, humidityEl);
 }
 
 search.click(formSubmitHandler);
