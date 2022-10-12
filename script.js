@@ -1,13 +1,15 @@
 var search = $("#user-form")
 var city = $("#city-input")
 var buttons = $("#button-list")
+var cityList = []
 
 function formSubmitHandler(event) {
     event.preventDefault();
 
-    if (city.val())
+    if (city.val()) {
         getCityInfo(city.val());
-    addButton(city.val());
+        addButton(city.val());
+    }
     city.val("");
 };
 
@@ -28,6 +30,10 @@ function getCityInfo(city) {
 }
 
 function displayInfo(data) {
+    $("#main-container").empty();
+    for (var i = 1; i <= 5; i++)
+        $("#mini-container" + i).empty();
+
     for (var i = 0; i < data.list.length; i++)
         if (i % 8 == 0)
             fillContainer(data, i / 8);
@@ -49,12 +55,19 @@ function fillContainer(data, x) {
         $("#main-container").append(cityEl, tempEl, windEl, humidityEl);
     else
         $("#mini-container" + x).append(cityEl, tempEl, windEl, humidityEl);
+
+    var obj = {
+        temp: tempEl,
+        wind: windEl,
+        humidity: humidityEl
+    }
+    localStorage.setItem(data.city.name, JSON.stringify(obj));
 }
 
 function addButton(name) {
     var buttonEl = $("<button>", { "class": "btn btn-secondary col-12 my-1" });
     buttonEl.text(name);
-    buttonEl.attr("data-city-name", name);
+    //buttonEl.attr("data-city-name", name);
     buttons.prepend(buttonEl);
 }
 
