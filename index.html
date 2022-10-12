@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./style.css" />
     <title>Weather Dashboard</title>
 </head>
 
+<!--header-->
 <header class="container-fluid bg-dark text-light mb-5 p-3">
     <div class="d-flex align-items-center justify-content-center">
         <h1>Weather Dashboard</h1>
@@ -17,13 +17,15 @@
 
 <body>
     <div class="container-fluid row">
-            <form class="col-3 border form" id="user-form">
-                <label class="col-form-label-lg font-weight-bold">Search for a city:</label>
-                <input class="form-control mb-2" id="city-input">
-                <button type="submit" class="btn btn-primary">Search</button>
-                <div id="button-list"></div>
-            </form>
-      
+        <!--container for form and buttons-->
+        <form class="col-3 border form" id="user-form">
+            <label class="col-form-label-lg font-weight-bold">Search for a city:</label>
+            <input class="form-control mb-2" id="city-input">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <div id="button-list"></div>
+        </form>
+
+        <!--container for data-->
         <div class="col-9">
             <div class="row card-body border">
                 <ul class="p-0" id="main-container"></ul>
