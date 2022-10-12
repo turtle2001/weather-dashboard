@@ -8,7 +8,6 @@ function formSubmitHandler(event) {
 
     if (city.val()) {
         getCityInfo(city.val());
-        addButton(city.val());
     }
     city.val("");
 };
@@ -24,6 +23,7 @@ function getCityInfo(city) {
             fetch(weather)
                 .then(response => response.json())
                 .then(function (data) {
+                    addButton(data.city.name);
                     displayInfo(data);
                 })
         })
@@ -55,20 +55,22 @@ function fillContainer(data, x) {
         $("#main-container").append(cityEl, tempEl, windEl, humidityEl);
     else
         $("#mini-container" + x).append(cityEl, tempEl, windEl, humidityEl);
-
-    var obj = {
-        temp: tempEl,
-        wind: windEl,
-        humidity: humidityEl
-    }
-    localStorage.setItem(data.city.name, JSON.stringify(obj));
 }
 
 function addButton(name) {
-    var buttonEl = $("<button>", { "class": "btn btn-secondary col-12 my-1" });
-    buttonEl.text(name);
-    //buttonEl.attr("data-city-name", name);
-    buttons.prepend(buttonEl);
+    if (!cityList.includes(name)) {
+        cityList.push(name);
+        var buttonEl = $("<button>", { "class": "btn btn-secondary col-12 my-1" });
+        buttonEl.text(name);
+        buttonEl.attr("city-name", name);
+        buttons.prepend(buttonEl);
+    }
+}
+
+function searchPrev(event) {
+    var city2 = event.target.getAttribute("city-name");
+    getCityInfo(city2);
 }
 
 search.click(formSubmitHandler);
+buttons.click(searchPrev);
