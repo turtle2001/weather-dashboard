@@ -3,12 +3,14 @@ var city = $("#city-input")
 var buttons = $("#button-list")
 var cityList = []
 
+showButtons();
+
 function formSubmitHandler(event) {
     event.preventDefault();
 
-    if (city.val()) {
+    if (city.val())
         getCityInfo(city.val());
-    }
+
     city.val("");
 };
 
@@ -60,16 +62,26 @@ function fillContainer(data, x) {
 function addButton(name) {
     if (!cityList.includes(name)) {
         cityList.push(name);
+        localStorage.setItem(cityList.length, name);
         var buttonEl = $("<button>", { "class": "btn btn-secondary col-12 my-1" });
         buttonEl.text(name);
         buttonEl.attr("city-name", name);
         buttons.prepend(buttonEl);
+        localStorage.setItem(0, cityList.length)
     }
 }
 
 function searchPrev(event) {
     var city2 = event.target.getAttribute("city-name");
     getCityInfo(city2);
+}
+
+function showButtons() {
+    for (var i = 1; i <= localStorage.getItem(0); i++) {
+        var buttonEl = $("<button>", { "class": "btn btn-secondary col-12 my-1" });
+        buttonEl.text(localStorage.getItem(i));
+        buttons.prepend(buttonEl);
+    }
 }
 
 search.click(formSubmitHandler);
